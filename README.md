@@ -31,6 +31,8 @@ npm install
 
 ### Using Environment Variables
 
+Rename `config.env.example` to `config.env` and update `USER`, `PASSWORD`, and `DATABASE_URL` to your MongoDB Atlas database credentials.
+
 Ensure your application correctly loads environment variables. You have already used `dotenv` in `server.js` to load environment variables:
 
 ```javascript
@@ -39,7 +41,7 @@ dotenv.config({ path: './config.env' });
 
 const app = require('./app');
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 app.listen(port, 'localhost', () => {
   console.log(`App running on port ${port}...`);
 });
