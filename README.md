@@ -45,6 +45,7 @@ const port = process.env.PORT || 3000;
 app.listen(port, 'localhost', () => {
   console.log(`App running on port ${port}...`);
 });
+```
 
 ## Running the Project
 
