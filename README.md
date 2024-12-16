@@ -29,6 +29,21 @@ cd learn-nodejs
 npm install
 ```
 
+### Using Environment Variables
+
+Ensure your application correctly loads environment variables. You have already used `dotenv` in `server.js` to load environment variables:
+
+```javascript
+const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
+
+const app = require('./app');
+
+const port = process.env.PORT || 5000;
+app.listen(port, 'localhost', () => {
+  console.log(`App running on port ${port}...`);
+});
+
 ## Running the Project
 
 To run the project, use the following command:
