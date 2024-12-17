@@ -1,50 +1,45 @@
-const Tour = require('../models/tourModel');
+const Tour = require("../models/tourModel");
 
+exports.createTour = async (req, res) => {
+  try {
+    const newTour = await Tour.create(req.body);
 
-// create a checkBody middleware
-exports.checkBody = (req, res, next) => {
-  // check if body contains the name and price property
-  if (!req.body.name || !req.body.price) {
-    return res.status(400).json({
-      status: 'fail',
-      message: 'Missing name or price'
+    res.status(201).json({
+      status: "success",
+      data: {
+        tour: newTour,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error?.errmsg,
     });
   }
-  next();
-}
+};
 
 exports.getAllTour = (req, res) => {
   res.status(200).json({
-    status: 'success',
+    status: "success",
     requestedAt: req.requestTime,
   });
-}
+};
 
 exports.getTour = (req, res) => {
-
   res.status(200).json({
-    status: 'success',
-  })
-}
-
-exports.createTour = (req, res) => {
-  res.status(201).json({
     status: "success",
-    data: {
-      tour: newTour,
-    },
   });
-}
+};
 
 exports.updateTour = (req, res) => {
   res.status(200).json({
-    status: 'success',
+    status: "success",
   });
-}
+};
 
 exports.deleteTour = (req, res) => {
   res.status(204).json({
-    status: 'success',
-    data: null
+    status: "success",
+    data: null,
   });
-}
+};
