@@ -31,17 +31,16 @@ exports.getAllTour = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(400).json({
+    res.status(404).json({
       status: "fail",
-      message: error?.errmsg,
+      message: error,
     });
   }
 };
 
 exports.getTour = async (req, res) => {
   try {
-    const id = req.params.id;
-    const tour = await Tour.findById(id);
+    const tour = await Tour.findById(req.params.id);
 
     res.status(200).json({
       status: "success",
@@ -50,9 +49,9 @@ exports.getTour = async (req, res) => {
       },      
     });
   } catch (error) {
-    res.status(400).json({
+    res.status(404).json({
       status: "fail",
-      message: error?.errmsg,
+      message: error,
     });
     
   }
@@ -60,16 +59,21 @@ exports.getTour = async (req, res) => {
 
 exports.updateTour = async (req, res) => {
   try {
-    const id = req.params.id;
-    await Tour.findByIdAndUpdate(id, req.body);
+    const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
 
     res.status(200).json({
       status: "success",
+      data: {
+        tour,
+      },
     });
   } catch (error) {
-    res.status(400).json({
+    res.status(404).json({
       status: "fail",
-      message: error?.errmsg,
+      message: error,
     });    
   }
 };
