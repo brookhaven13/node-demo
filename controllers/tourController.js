@@ -90,7 +90,7 @@ exports.deleteTour = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       status: "fail",
-      message: error?.errmsg,
+      message: error,
     });
   }
 };
