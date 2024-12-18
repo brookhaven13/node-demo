@@ -18,11 +18,24 @@ exports.createTour = async (req, res) => {
   }
 };
 
-exports.getAllTour = (req, res) => {
-  res.status(200).json({
-    status: "success",
-    requestedAt: req.requestTime,
-  });
+exports.getAllTour = async (req, res) => {
+  try {
+    const tours = await Tour.find();
+
+    res.status(200).json({
+      status: "success",
+      requestedAt: req.requestTime,
+      results: tours.length,
+      data: {
+        tours,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error?.errmsg,
+    });
+  }
 };
 
 exports.getTour = (req, res) => {
